@@ -4,12 +4,12 @@
 
 {% block content %}
     <h1>register</h1>
-    <form>
-        Firstname: <input type="text"><br>
-        Lastname: <input type="text"><br>
-        Email: <input type="email"><br>
-        Pseudo: <input type="text"><br>
-        Password: <input type="password"><br>
+    <form method="POST" action="?action=register">
+        Firstname: <input type="text" name="firstname"><br>
+        Lastname: <input type="text" name="lastname"><br>
+        Email: <input type="email" name="email"><br>
+        Pseudo: <input type="text" name="pseudo"><br>
+        Password: <input type="password" name="password"><br>
         Repeat Password: <input type="password"><br>
         <button>Enter</button>
     </form>
