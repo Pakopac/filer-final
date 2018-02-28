@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ parent() }} - register{% endblock %}
+
+{% block content %}
+    <h1>register</h1>
+    <form>
+        Firstname: <input type="text"><br>
+        Lastname: <input type="text"><br>
+        Email: <input type="email"><br>
+        Pseudo: <input type="text"><br>
+        Password: <input type="password"><br>
+        Repeat Password: <input type="password"><br>
+        <button>Enter</button>
+    </form>
+{% endblock %}
