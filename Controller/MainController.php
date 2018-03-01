@@ -2,6 +2,7 @@
 
 require_once('Cool/BaseController.php');
 require_once ('Model/RegisterManager.php');
+require_once ('Model/LoginManager.php');
 
 class MainController extends BaseController
 {
@@ -11,7 +12,14 @@ class MainController extends BaseController
     }
     public function loginAction()
     {
-        return $this->render('login.html.twig');
+        if(!empty($_POST['loginPseudo']) && !empty($_POST['loginPassword'])) {
+            $pseudo = htmlentities($_POST['loginPseudo']);
+            $password = $_POST['loginPassword'];
+
+            $LoginManager = new LoginManager();
+            $LoginManager -> loginUser($pseudo, $password);
+        }
+            return $this->render('login.html.twig');
     }
     public function registerAction()
     {

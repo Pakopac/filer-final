@@ -4,9 +4,9 @@
 
 {% block content %}
     <h1>Login</h1>
-    <form>
-    pseudo: <input type="text">
-    password: <input type="password">
+    <form method="POST" action="?action=login">
+    pseudo: <input name="loginPseudo" type="text">
+    password: <input name="loginPassword" type="password">
     <button>Enter</button>
     </form>
 {% endblock %}

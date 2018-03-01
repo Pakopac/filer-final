@@ -17,5 +17,8 @@ class RegisterManager
         $stmt->bindParam(':password', $password);
 
         $stmt->execute();
+
+        header('Location: ?action=home');
+        exit();
     }
 }
