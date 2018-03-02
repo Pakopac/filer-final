@@ -15,7 +15,7 @@ class LoginManager
         $result->execute();
         $user = $result -> fetch();
 
-        if($user === false){
+        if($user === false && $pseudo !== 'undefined' && $password !== 'undefined'){
           echo 'invalid';
         }
 
@@ -23,9 +23,6 @@ class LoginManager
             session_start();
             $_SESSION['id'] = $user['id'];
             $_SESSION['pseudo'] = $user['pseudo'];
-
-            header('Location: ?action=home');
-            exit();
         }
     }
 }

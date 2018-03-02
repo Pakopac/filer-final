@@ -18,8 +18,12 @@ class MainController extends BaseController
 
             $LoginManager = new LoginManager();
             $LoginManager -> loginUser($pseudo, $password);
+            if(isset($_SESSION['pseudo'])) {
+                $data = ['pseudo' => $_SESSION['pseudo']];
+                return $this->render('home.html.twig', $data);
+            }
         }
-            return $this->render('login.html.twig');
+        return $this->render('login.html.twig');
     }
     public function registerAction()
     {
