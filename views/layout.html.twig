@@ -7,8 +7,14 @@
   </head>
   <body>
     <a href="?action=home">home</a>
+
+    {% if not pseudo %}
     <a href="?action=login">login</a>
     <a href="?action=register">register</a>
+    {% else %}
+    <a href="?action=uploadFiles">upload files</a>
+    <a href="?action=viewFiles">view files</a>
+    {% endif %}
     {% block content %}{% endblock %}
   </body>
 </html>

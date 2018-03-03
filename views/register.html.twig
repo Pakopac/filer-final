@@ -10,7 +10,10 @@
         Email: <input type="email" name="email"><br>
         Pseudo: <input type="text" name="pseudo"><br>
         Password: <input type="password" name="password"><br>
-        Repeat Password: <input type="password"><br>
+        Repeat Password: <input type="password" name="repeatPassword"><br>
         <button>Enter</button>
     </form>
+    {% for errors in error %}
+        <div class="errors">{{ error }}</div>
+        {% endfor %}
 {% endblock %}
