@@ -6,7 +6,7 @@ class RegisterManager
 {
     public function registerUser($firstname, $lastname, $pseudo, $email,$password, $password_repeat)
     {
-        $errors = [];
+        /*$errors = [];
         $regexPassword = "^(?=.[a-z])(?=.[A-Z])(?=.\d)[a-zA-Z\d]{6,}$^";
         $regexEmail =  " /^[^\W][a-zA-Z0-9]+(.[a-zA-Z0-9]+)@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)*.[a-zA-Z]{2,4}$/ ";
 
@@ -22,7 +22,7 @@ class RegisterManager
         if($password !== $password_repeat){
             $errors[] = 'Password must be identical to the verification';
         }
-        if($errors === []) {
+        if($errors === []) {*/
             $dbm = DBManager::getInstance();
             $pdo = $dbm->getPdo();
 
@@ -40,13 +40,12 @@ class RegisterManager
             $result->bindParam(':password', $password);
             $result->execute();
             $user = $result->fetch();
-
             $_SESSION['id'] = $user['id'];
             $_SESSION['pseudo'] = $user['pseudo'];
-        }
+        /*}
         else{
             ['errors' => $errors];
-        }
+        }*/
 
     }
 }

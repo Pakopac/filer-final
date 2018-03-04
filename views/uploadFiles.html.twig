@@ -4,4 +4,8 @@
 
 {% block content %}
     <h1>Upload Files</h1>
+    <form name="upload" method="POST" action="?action=uploadFiles" enctype="multipart/form-data">
+        <label for="file" class="labelFile"><img class="spear" src="img/spear.png" alt="icon spire"><img class="icon_file" src="img/icon_file.png" alt="icon file"></label>
+        <input type="file" id="file" name="inputFile" class="inputFile" onchange="this.form.submit();">
+    </form>
 {% endblock %}

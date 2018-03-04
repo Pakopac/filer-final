@@ -14,10 +14,13 @@ class LoginManager
         $result->bindParam(':password', $password);
         $result->execute();
         $user = $result -> fetch();
-        $_SESSION['pseudo'] = $user['pseudo'];
 
         if($user === false && $pseudo !== 'undefined' && $password !== 'undefined'){
           echo 'invalid';
+        }
+        else{
+            $_SESSION = $user;
+            $_SESSION['pseudo'] = $user['pseudo'];
         }
     }
 }
