@@ -2,7 +2,6 @@
 require_once('Cool/BaseController.php');
 require_once ('Model/RegisterManager.php');
 require_once ('Model/LoginManager.php');
-require_once ('Model/LogoutManager.php');
 session_start();
 class MainController extends BaseController
 {
@@ -23,8 +22,8 @@ class MainController extends BaseController
             $LoginManager = new LoginManager();
             $LoginManager -> loginUser($pseudo, $password);
             if(isset($_SESSION['pseudo'])) {
-                $data = ['pseudo' => $_SESSION['pseudo'],
-                    'user' => $_SESSION];
+                $data = ['user' => $_SESSION];
+                $this->redirectToRoute('home');
                 return $this->render('home.html.twig', $data);
             }
             }
@@ -44,8 +43,7 @@ class MainController extends BaseController
 
             $RegisterManager = new RegisterManager();
             $RegisterManager -> registerUser($firstname, $lastname, $pseudo, $email,$password, $repeatPassword);
-                $data = ['pseudo' => $_SESSION['pseudo'],
-                    'user' => $_SESSION];
+                $data = ['user' => $_SESSION];
             $this->redirectToRoute('home');
             return $this->render('layout.html.twig', $data);
         }
@@ -65,6 +63,6 @@ class MainController extends BaseController
     {
         session_destroy();
         $this -> redirectToRoute('home');
-        return $this->render('logout.html.twig');
+        return $this->render('home.html.twig');
     }
 }

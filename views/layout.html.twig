@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
+  {% if user %}
+    logged in as {{user['pseudo']}}
+  {% else %}
+    not logged in
+  {% endif %}
     <a href="?action=home">home</a>
     {% if user %}
       <a href="?action=uploadFiles">upload files</a>
