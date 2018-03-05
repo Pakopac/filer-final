@@ -14,13 +14,6 @@ class LoginManager
         $result->bindParam(':password', $password);
         $result->execute();
         $user = $result -> fetch();
-
-        if($user === false && $pseudo !== 'undefined' && $password !== 'undefined'){
-          echo 'invalid';
-        }
-        else{
-            $_SESSION = $user;
-            $_SESSION['pseudo'] = $user['pseudo'];
-        }
+        $_SESSION = $user;
     }
 }

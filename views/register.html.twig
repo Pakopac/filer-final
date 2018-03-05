@@ -13,7 +13,7 @@
         Repeat Password: <input type="password" name="repeatPassword"><br>
         <button>Enter</button>
     </form>
-    {% for errors in error %}
+    {% for error in errors %}
         <div class="errors">{{ error }}</div>
         {% endfor %}
 {% endblock %}
