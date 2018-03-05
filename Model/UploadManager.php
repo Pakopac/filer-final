@@ -6,10 +6,20 @@ class UploadManager
 {
     public function uploadFiles()
     {
+        $messagesUpload = [];
         if(isset($_FILES['inputFile'])) {
             $uploaddir = 'files/' . $_SESSION['pseudo'] . '/';
             $file = basename($_FILES['inputFile']['name']);
-            move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir . $file);
+        if(file_exists($uploaddir.$file)){
+            $messagesUpload[] = 'Error: File already exist';
         }
+        elseif(move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir . $file)) {
+            $messagesUpload[] = 'File send !';
+        }
+        else {
+            $messagesUpload[] = 'Error: File not send !';
+        }
+    }
+    return $messagesUpload;
     }
 }
