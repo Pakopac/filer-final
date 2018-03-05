@@ -25,5 +25,6 @@ class RegisterManager
             $user = $result->fetch();
             $_SESSION['id'] = $user['id'];
             $_SESSION['pseudo'] = $user['pseudo'];
+            mkdir('./files/'.$user['pseudo']);
     }
 }

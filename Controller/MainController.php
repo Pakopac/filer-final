@@ -2,6 +2,7 @@
 require_once('Cool/BaseController.php');
 require_once ('Model/RegisterManager.php');
 require_once ('Model/LoginManager.php');
+require_once ('Model/UploadManager.php');
 session_start();
 class MainController extends BaseController
 {
@@ -79,6 +80,13 @@ class MainController extends BaseController
     }
     public function UploadFilesAction()
     {
+        if(isset($_FILES['inputFile'])){
+            $UploadManager = new UploadManager();
+            $UploadManager->uploadFiles();
+            $data = ['file' => $_FILES,
+                'user' => $_SESSION];
+            return $this->render('uploadFiles.html.twig',$data);
+        }
         $data = ['user' => $_SESSION];
         return $this->render('uploadFiles.html.twig',$data);
     }
