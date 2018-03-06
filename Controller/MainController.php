@@ -46,35 +46,17 @@ class MainController extends BaseController
             $email = htmlentities($_POST['email']);
             $password = $_POST['password'];
             $repeatPassword = $_POST['repeatPassword'];
-
-            $regexPassword = "\"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$\"";
-            $regexEmail =  " /^[^\W][a-zA-Z0-9]+(.[a-zA-Z0-9]+)@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)*.[a-zA-Z]{2,4}$/ ";
-            $errors = [];
-
-            if (!preg_match($regexEmail,$email)){
-                $errors[] = 'Invalid Email';
-            }
-            if((strlen($pseudo) < 4) || (strlen($pseudo) > 20)){
-                $errors[] = 'Pseudo too short or too long';
-            }
-            if(!preg_match($regexPassword,$password)){
-                $errors[] = 'Password must have at least 6 characters with 1 letter uppercase and 1 number';
-            }
-            if($password !== $repeatPassword){
-                $errors[] = 'Password must be identical to the verification';
-            }
-
-            if($errors === []) {
                 $RegisterManager = new RegisterManager();
-                $RegisterManager->registerUser($firstname, $lastname, $pseudo, $email, $password);
-                $data = ['user' => $_SESSION];
-                $this->redirectToRoute('home');
-                return $this->render('layout.html.twig', $data);
-            }
-            else{
-                $data = ['errors' => $errors];
-                return $this->render('register.html.twig', $data);
-            }
+                $errors = $RegisterManager->registerUser($firstname, $lastname, $pseudo, $email, $password, $repeatPassword);
+                if($errors === []) {
+                    $data = ['user' => $_SESSION];
+                    $this->redirectToRoute('home');
+                    return $this->render('layout.html.twig', $data);
+                }
+                else{
+                    $data = ['errors' => $errors];
+                    return $this->render('register.html.twig', $data);
+                }
         }
         return $this->render('register.html.twig');
     }
