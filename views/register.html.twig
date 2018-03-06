@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ parent() }} - register{% endblock %}
+
+{% block content %}
+    <p class="reg">Register</p>
+    <form method="POST" action="?action=register">
+       <input class="boxe" type="text" name="firstname" placeholder="Firstname"><br>
+        <input class="boxe" type="text" name="lastname" placeholder="Lastname"><br>
+        <input class="boxe" type="email" name="email"placeholder="email"><br>
+        <input class="boxe" type="text" name="pseudo" placeholder="Pseudo"><br>
+        <input class="boxe" type="password" name="password" placeholder="Password"><br>
+       <input class="boxe" type="password" name="repeatPassword" placeholder="Repeat Password"><br><br>
+        <button class="btn">Enter</button>
+    </form>
+    {% for error in errors %}
+        <div class="errors">{{ error }}</div>
+        {% endfor %}
+{% endblock %}

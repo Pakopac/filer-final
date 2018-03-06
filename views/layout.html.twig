@@ -2,10 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>{% block page_title %}{% endblock %}</title>
+    <title>{% block page_title %}Filer{% endblock %}</title>
     <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
+  {% if user %}
+   <div class="not"> Logged in as <br>{{user['pseudo']}} </div><br><br>
+  {% else %}
+    <div class="not">Not logged in </div><br><br><br>
+  {% endif %}
+    <a class="hom" href="?action=home">Home</a><br>
+    {% if user %}
+      <a class="bum"href="?action=uploadFiles">Upload-files</a><br>
+      <a class="regi" href="?action=viewFiles">View-files</a><br>
+        <a class="logi" href="?action=logout">Logout</a><br>
+    {% else %}
+      <a class="gum" href="?action=login">Login</a><br>
+      <a class="regi" href="?action=register">Register</a>
+    {% endif %}
     {% block content %}{% endblock %}
   </body>
 </html>

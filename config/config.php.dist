@@ -1,15 +1,19 @@
 <?php
-
 $config = [
     'homepage_route' => 'home',
     'db' => [
-        'name'     => 'cool',
+        'name'     => 'filer',
         'user'     => 'root',
         'password' => '',
         'host'     => '127.0.0.1',
         'port'     => NULL
     ],
     'routes' => [
-        'home'    => 'Main:home',
+        'home'        => 'Main:home',
+        'login'       => 'Main:login',
+        'register'    => 'Main:register',
+        'uploadFiles' => 'Main:UploadFiles',
+        'viewFiles'   => 'Main:viewFiles',
+        'logout'      => 'Main:logout',
     ]
 ];
