@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ parent() }} - create directory{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <br>
+name: <input name="nameDirectory" type="text"><br>
+path: <input name="pathDirectory" type="text"><br>
+<button>Create a directory</button>
+</form>
+{% endblock %}

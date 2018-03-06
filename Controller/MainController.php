@@ -63,8 +63,8 @@ class MainController extends BaseController
     public function UploadFilesAction()
     {
         if(isset($_FILES['inputFile'])){
-            $UploadManager = new FilesManager();
-            $messagesUpload = $UploadManager->uploadFiles();
+            $FileManager = new FilesManager();
+            $messagesUpload = $FileManager->uploadFiles();
             $data = ['file' => $_FILES,
                 'user' => $_SESSION,
                 'messagesUpload' => $messagesUpload];
@@ -86,5 +86,18 @@ class MainController extends BaseController
         session_destroy();
         $this -> redirectToRoute('home');
         return $this->render('home.html.twig');
+    }
+    public function createDirectoryAction()
+    {
+        if(!empty($_POST['nameDirectory']) && !empty($_POST['pathDirectory'])){
+            $nameDirectory = $_POST['nameDirectory'];
+            $pathDirectory = $_POST['pathDirectory'];
+            $FilesManager = new FilesManager();
+            $FilesManager->createDirectory($nameDirectory, $pathDirectory);
+            $data = ['user' => $_SESSION];
+            return $this->render('createDirectory.html.twig',$data);
+        }
+        $data = ['user' => $_SESSION];
+        return $this->render('createDirectory.html.twig',$data);
     }
 }

@@ -34,4 +34,9 @@ class FilesManager
         }
         return $list;
     }
+
+    public function createDirectory()
+    {
+
+    }
 }
