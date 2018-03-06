@@ -3,15 +3,15 @@
 {% block page_title %}{{ parent() }} - register{% endblock %}
 
 {% block content %}
-    <h1>register</h1>
+    <p class="reg">Register</p>
     <form method="POST" action="?action=register">
-        Firstname: <input type="text" name="firstname"><br>
-        Lastname: <input type="text" name="lastname"><br>
-        Email: <input type="email" name="email"><br>
-        Pseudo: <input type="text" name="pseudo"><br>
-        Password: <input type="password" name="password"><br>
-        Repeat Password: <input type="password" name="repeatPassword"><br>
-        <button>Enter</button>
+       <input class="boxe" type="text" name="firstname" placeholder="Firstname"><br>
+        <input class="boxe" type="text" name="lastname" placeholder="Lastname"><br>
+        <input class="boxe" type="email" name="email" placeholder="email"><br>
+        <input class="boxe" type="text" name="pseudo" placeholder="Pseudo"><br>
+        <input class="boxe" type="password" name="password" placeholder="Password"><br>
+       <input class="boxe" type="password" name="repeatPassword" placeholder="Repeat Password"><br><br>
+        <button class="btn">Enter</button>
     </form>
     {% for error in errors %}
         <div class="errors">{{ error }}</div>

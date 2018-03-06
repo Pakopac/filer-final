@@ -31,7 +31,7 @@ class MainController extends BaseController
                 $data = ['errors' => $errors];
                 return $this->render('login.html.twig', $data);
             }
-            }
+        }
         return $this->render('login.html.twig');
     }
     public function registerAction()
@@ -46,17 +46,17 @@ class MainController extends BaseController
             $password = $_POST['password'];
             $repeatPassword = $_POST['repeatPassword'];
 
-                $UserManager = new UserManager();
-                $errors = $UserManager->registerUser($firstname, $lastname, $pseudo, $email, $password, $repeatPassword);
-                if($errors === []) {
-                    $data = ['user' => $_SESSION];
-                    $this->redirectToRoute('home');
-                    return $this->render('layout.html.twig', $data);
-                }
-                else{
-                    $data = ['errors' => $errors];
-                    return $this->render('register.html.twig', $data);
-                }
+            $UserManager = new UserManager();
+            $errors = $UserManager->registerUser($firstname, $lastname, $pseudo, $email, $password, $repeatPassword);
+            if($errors === []) {
+                $data = ['user' => $_SESSION];
+                $this->redirectToRoute('home');
+                return $this->render('layout.html.twig', $data);
+            }
+            else{
+                $data = ['errors' => $errors];
+                return $this->render('register.html.twig', $data);
+            }
         }
         return $this->render('register.html.twig');
     }
@@ -78,7 +78,7 @@ class MainController extends BaseController
         $FileManager = new FilesManager();
         $list = $FileManager->listFiles();
         $data = ['user' => $_SESSION,
-                 'list' => $list];
+            'list' => $list];
         return $this->render('viewFiles.html.twig',$data);
     }
     public function logoutAction()

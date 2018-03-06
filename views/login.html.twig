@@ -3,11 +3,11 @@
 {% block page_title %}{{ parent() }} - login{% endblock %}
 
 {% block content %}
-    <h1>Login</h1>
+    <p class="gum">Login</p><br><br><br><br><br><br>
     <form method="POST" action="?action=login">
-    pseudo: <input name="loginPseudo" type="text">
-    password: <input name="loginPassword" type="password">
-    <button>Enter</button>
+    <input name="loginPseudo" type="text" placeholder="pseudo"><br>
+    <input name="loginPassword" type="password" placeholder="password"><br><br>
+    <button class="btn1">Enter</button>
     </form>
     {{ errors }}
 {% endblock %}

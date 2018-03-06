@@ -7,19 +7,19 @@
   </head>
   <body>
   {% if user %}
-    logged in as {{user['pseudo']}}
+   <div class="not"> Logged in as <br>{{user['pseudo']}} </div><br><br>
   {% else %}
-    not logged in
+    <div class="not">Not logged in </div><br><br><br>
   {% endif %}
-    <a href="?action=home">home</a>
+    <a class="hom" href="?action=home">Home</a><br>
     {% if user %}
         <a href="?action=createDirectory">create directory</a>
-      <a href="?action=uploadFiles">upload files</a>
-      <a href="?action=viewFiles">view files</a>
-        <a href="?action=logout">Logout</a>
+      <a class="bum"href="?action=uploadFiles">Upload-files</a><br>
+      <a class="regi" href="?action=viewFiles">View-files</a><br>
+        <a class="logi" href="?action=logout">Logout</a><br>
     {% else %}
-      <a href="?action=login">login</a>
-      <a href="?action=register">register</a>
+      <a class="gum" href="?action=login">Login</a><br>
+      <a class="regi" href="?action=register">Register</a>
     {% endif %}
     {% block content %}{% endblock %}
   </body>
