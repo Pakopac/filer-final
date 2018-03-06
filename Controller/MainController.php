@@ -1,7 +1,6 @@
 <?php
 require_once('Cool/BaseController.php');
-require_once('Model/RegisterManager.php');
-require_once('Model/LoginManager.php');
+require_once('Model/UserManager.php');
 require_once('Model/FilesManager.php');
 session_start();
 class MainController extends BaseController
@@ -21,8 +20,8 @@ class MainController extends BaseController
             $password = $_POST['loginPassword'];
             $errors = 'Invalid pseudo or password';
 
-            $LoginManager = new LoginManager();
-            $LoginManager -> loginUser($pseudo, $password,$errors);
+            $UserManager = new UserManager();
+            $UserManager -> loginUser($pseudo, $password,$errors);
             if(isset($_SESSION['pseudo'])) {
                 $data = ['user' => $_SESSION];
                 $this->redirectToRoute('home');
@@ -46,8 +45,9 @@ class MainController extends BaseController
             $email = htmlentities($_POST['email']);
             $password = $_POST['password'];
             $repeatPassword = $_POST['repeatPassword'];
-                $RegisterManager = new RegisterManager();
-                $errors = $RegisterManager->registerUser($firstname, $lastname, $pseudo, $email, $password, $repeatPassword);
+
+                $UserManager = new UserManager();
+                $errors = $UserManager->registerUser($firstname, $lastname, $pseudo, $email, $password, $repeatPassword);
                 if($errors === []) {
                     $data = ['user' => $_SESSION];
                     $this->redirectToRoute('home');
