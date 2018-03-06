@@ -2,7 +2,7 @@
 
 require_once('Cool/DBManager.php');
 
-class UploadManager
+class FilesManager
 {
     public function uploadFiles()
     {
@@ -21,5 +21,17 @@ class UploadManager
         }
     }
     return $messagesUpload;
+    }
+
+    public function listFiles()
+    {
+        $list = [];
+        $dir = opendir('files/' . $_SESSION['pseudo'] . '');
+        while(false !== ($file = readdir($dir))){
+            if($file !== '.' && $file !=='..') {
+                $list[] = $file;
+            }
+        }
+        return $list;
     }
 }

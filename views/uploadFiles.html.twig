@@ -4,10 +4,10 @@
 
 {% block content %}
     <h1>Upload Files</h1>
-    <div class="link"><a href="?action=viewFiles">Click here to check your files</a></div>
+    <div class="linkView"><a href="?action=viewFiles">Click here to check your files</a></div>
     <div class="messageUpload">Upload your files here :</div>
-    <form name="upload" method="POST" action="?action=uploadFiles" enctype="multipart/form-data">
-        <label for="file" class="labelFile"><img class="spear" src="img/spear.png" alt="icon spire"><img class="icon_file" src="img/icon_file.png" alt="icon file"></label>
+    <form class="formUpload" name="upload" method="POST" action="?action=uploadFiles" enctype="multipart/form-data">
+        <label for="file" class="labelFile"><img class="spear" src="assets/img/spear.png" alt="icon spire"><img class="icon_file" src="assets/img/icon_file.png" alt="icon file"></label>
         <input type="file" id="file" name="inputFile" class="inputFile" onchange="this.form.submit();">
     </form>
     {% for message in messagesUpload %}
