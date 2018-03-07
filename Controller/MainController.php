@@ -89,7 +89,7 @@ class MainController extends BaseController
     }
     public function createDirectoryAction()
     {
-        if(!empty($_POST['nameDirectory']) && !empty($_POST['pathDirectory'])){
+        if(!empty($_POST['nameDirectory'])){
             $nameDirectory = $_POST['nameDirectory'];
             $pathDirectory = $_POST['pathDirectory'];
             $FilesManager = new FilesManager();

@@ -3,7 +3,7 @@
 {% block page_title %}{{ parent() }} - create directory{% endblock %}
 
 {% block content %}
-<form method="POST">
+<form method="POST" action="?action=createDirectory">
     <br>
 name: <input name="nameDirectory" type="text"><br>
 path: <input name="pathDirectory" type="text"><br>
