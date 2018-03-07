@@ -35,8 +35,8 @@ class FilesManager
         return $list;
     }
 
-    public function createDirectory($nameDirectory, $pathDirectory)
+    public function createDirectory($nameDirectory)
     {
-        mkdir('./files/'.$_SESSION['pseudo']. '/' . $pathDirectory .'/' . $nameDirectory);
+        mkdir('./files/'.$_SESSION['pseudo'] .'/' . $nameDirectory);
     }
 }

@@ -14,7 +14,8 @@
     margin-bottom: 50px;
 }
 .formUpload{
-    margin-top: 200px;
+    margin-left: -25%;
+    margin-top: 125px;
 }
 .labelFile{
     border: 1px solid black;
@@ -41,6 +42,25 @@
     margin-right: 20px;
     transform: rotate(320deg);
 }
+.createDirectory{
+    text-align: center;
+}
+.btnCreate{
+    margin-top: 10px;
+    margin-left: 70px;
+}
+.files{
+    margin-top: 300px;
+    font-size: 60px;
+    text-align: center
+}
+.listFiles{
+    text-align: center;
+}
+.messageUpload{
+    margin-left: 10%;
+    font-size: 30px;
+}
 body{
     background-color:white;
 }
@@ -52,7 +72,6 @@ form {
 .btn{
     position: absolute;
     left:32%;
-
 }
 .btn1{
     position: absolute;
