@@ -5,9 +5,9 @@
 {% block content %}
     <p class="gum">Login</p><br><br><br><br><br><br>
     <form method="POST" action="?action=login">
-    <input name="loginPseudo" type="text" placeholder="pseudo"><br>
-    <input name="loginPassword" type="password" placeholder="password"><br><br>
-    <button class="btn1">Enter</button>
+    <input class="boxe" name="loginPseudo" type="text" placeholder="Pseudo"><br>
+    <input class="boxe" name="loginPassword" type="password" placeholder="Password"><br><br>
+    <button class="btn">Enter</button>
     </form>
     {{ errors }}
 {% endblock %}

@@ -9,11 +9,10 @@ $config = [
         'port'     => NULL
     ],
     'routes' => [
-        'home'        => 'Main:home',
-        'login'       => 'Main:login',
-        'register'    => 'Main:register',
-        'uploadFiles' => 'Main:UploadFiles',
-        'viewFiles'   => 'Main:viewFiles',
-        'logout'      => 'Main:logout',
+        'home'     => 'Main:home',
+        'login'    => 'Main:login',
+        'logout'   => 'Main:logout',
+        'register' => 'Main:register',
+        'files'    => 'Main:files',
     ]
 ];
