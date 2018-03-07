@@ -2,9 +2,9 @@
 
 {% block page_title %}{{ parent() }} - login{% endblock %}
 
-{% block content %}
-    <p class="home"Upload Files</p>
-    <div class="link"><a href="?action=viewFiles">Click here to check your files</a></div>
+{% block content %} 
+    <p class="home">Upload Files</p><br><br><br>
+    <div class="link"><a href="?action=viewFiles">Click here to check your files</a></div><br><br>
     <div class="messageUpload">Upload your files here :</div>
     <form name="upload" method="POST" action="?action=uploadFiles" enctype="multipart/form-data">
         <label for="file" class="labelFile"><img class="spear" src="img/spear.png" alt="icon spire"><img class="icon_file" src="img/icon_file.png" alt="icon file"></label>

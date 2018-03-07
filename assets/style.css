@@ -7,18 +7,26 @@
    
     
 }
-body{
-    background-color:white;
-}
+
 form {
     position: absolute;
-    left:45%;
+    left:42%;
+   
     
+    
+}
+input{
+    border: 1px solid black;
+    text-align: center;
+    
+
 }
 
 .btn{
     position: absolute;
     left:32%;
+    width:80px;
+    height:40px;
 
 }
 .btn1{
@@ -32,18 +40,19 @@ form {
 .home{
     text-align: center;
     font-size: 30px;
+  
 }
 .hell{
    
     
-    background-color:grey;
+    background-color:rgb(44, 39, 39);
     width: 100%;
-    height:50px;
+    height:60px;
     text-align: center;
     font-size: 20px;
     position: absolute;
     top: 92%;
-    
+    color:papayawhip;
 }
 
 .not {
@@ -62,9 +71,11 @@ form {
     top:3%;
     left:0%;
     text-decoration: none;
-    background-color: grey;
-    width:100%;
-    height:50px;
+   background-color:rgb(44, 39, 39);
+   width: 100%;
+    height:60px;
+    font-size: 30px;
+    color: papayawhip;
 
 }
 .bum{
@@ -72,13 +83,18 @@ form {
     top:3%;
     left:35%;
     text-decoration: none;
+    font-size: 30px;
+    color: papayawhip;
+    
    
 }
 .regi{
     position: absolute;
     top:3%;
-    left:95%;
+    right:0.1%;
     text-decoration: none;
+    font-size: 30px;
+    color: papayawhip;
 
 }
 .logi{
@@ -86,16 +102,45 @@ form {
     top:3%;
     left:58%;
     text-decoration: none;
+    font-size: 30px;
+    color: papayawhip;
 }
 .gum{
     position: absolute;
     top:3%;
     left:50%;
     text-decoration: none;
+    font-size: 30px;
+    color: papayawhip;
 
 }
 .reg{
     text-align: center;
     font-size: 30px;
 
+}
+.boxe{
+    width: 250px;
+    height:30px;
+}
+.vue {
+    text-align: center;
+    font-size: 30px;
+
+}
+.link{
+    text-align: center;
+    font-size: 20px;
+    
+
+}
+.messageUpload{
+    position: absolute;
+    left: 395px;
+    top:318px;
+
+    font-size: 21px;
+}
+body{
+    background-color: aliceblue;
 }
