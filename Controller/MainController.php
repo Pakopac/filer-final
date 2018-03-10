@@ -60,24 +60,6 @@ class MainController extends BaseController
         }
         return $this->render('register.html.twig');
     }
-    public function viewFilesAction()
-    {
-        $FileManager = new FilesManager();
-        $list = $FileManager->listFiles();
-        $data = ['user' => $_SESSION,
-            'list' => $list];
-        if (!empty($_POST['nameDirectory'])){
-            $nameDirectory = $_POST['nameDirectory'];
-            $FileManager = new FilesManager();
-            $directory = $FileManager->createDirectory($nameDirectory);
-            $data = ['user' => $_SESSION,
-                'directory' => $directory,
-                'list' => $list];
-            $this->redirectToRoute('viewFiles');
-            return $this->render('viewFiles.html.twig',$data);
-        }
-        return $this->render('viewFiles.html.twig',$data);
-    }
 
     public function filesAction()
     {
@@ -87,21 +69,20 @@ class MainController extends BaseController
             $data = ['file' => $_FILES,
                 'user' => $_SESSION,
                 'messagesUpload' => $messagesUpload];
-            $this->redirectToRoute('files');
             return $this->render('files.html.twig',$data);
         }
+
+        $startPath = 'files/'.$_SESSION['pseudo'].'/';
         $FileManager = new FilesManager();
-        $list = $FileManager->listFiles();
+        $list = $FileManager->listFiles($startPath);
         $data = ['user' => $_SESSION,
-            'list' => $list];
+            'list' => $list,
+            'startPath' => $startPath];
         if (!empty($_POST['nameDirectory'])){
             $nameDirectory = $_POST['nameDirectory'];
             $FileManager = new FilesManager();
             $directory = $FileManager->createDirectory($nameDirectory);
-            $data = ['user' => $_SESSION,
-                'directory' => $directory,
-                'list' => $list];
-            $this->redirectToRoute('files');
+            $data .= ['directory' => $directory];
             return $this->render('files.html.twig',$data);
         }
         return $this->render('files.html.twig',$data);

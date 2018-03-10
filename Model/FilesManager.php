@@ -8,35 +8,45 @@ class FilesManager
     {
         $messagesUpload = [];
         if(isset($_FILES['inputFile'])) {
-            $uploaddir = 'files/' . $_SESSION['pseudo'] . '/';
+            $uploaddir = $_GET['path'];
             $file = basename($_FILES['inputFile']['name']);
-        if(file_exists($uploaddir.$file)){
+        if(file_exists($uploaddir.'/'.$file)){
             $messagesUpload[] = 'Error: File already exist';
         }
-        elseif(move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir . $file)) {
+        elseif(move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir. '/' . $file)) {
             $messagesUpload[] = 'File send !';
         }
         else {
             $messagesUpload[] = 'Error: File not send !';
         }
     }
+    header('Location: ?action=files&path='.$_GET['path']);
     return $messagesUpload;
     }
 
-    public function listFiles()
+    public function setPath(){
+
+    }
+    public function listFiles($startPath)
     {
         $list = [];
-        $dir = opendir('files/' . $_SESSION['pseudo'] . '');
-        while(false !== ($file = readdir($dir))){
-            if($file !== '.' && $file !=='..') {
-                $list[] = $file;
+            $path = $_GET['path'];
+            var_dump($path);
+            $file = array_diff(scandir($path), array('.', '..'));
+            foreach ($file as $value) {
+                $list[] = $value;
             }
-        }
-        return $list;
+            return [$list,$path];
     }
 
     public function createDirectory($nameDirectory)
     {
-        mkdir('./files/'.$_SESSION['pseudo'] .'/' . $nameDirectory);
+        mkdir($_GET['path'].'/'.$nameDirectory);
+        header('Location: ?action=files&path='.$_GET['path']);
+    }
+
+    public function openDirectory()
+    {
+
     }
 }

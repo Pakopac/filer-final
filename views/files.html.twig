@@ -22,6 +22,7 @@
     <div class="files">files</div>
     <div class="listFiles">
     {% for file in list %}
+        <a href="?action=files&path={{ startPath }}{{ file }}">{{file}}</a>
         <a href="./files/{{ user['pseudo'] }}/{{ file }}">{{ file }}</a><br>
     {% endfor %}
     </div>
