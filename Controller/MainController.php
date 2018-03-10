@@ -63,6 +63,7 @@ class MainController extends BaseController
 
     public function filesAction()
     {
+        $path = $_GET['path'];
         if(isset($_FILES['inputFile'])){
             $FileManager = new FilesManager();
             $messagesUpload = $FileManager->uploadFiles();
@@ -72,12 +73,11 @@ class MainController extends BaseController
             return $this->render('files.html.twig',$data);
         }
 
-        $startPath = 'files/'.$_SESSION['pseudo'].'/';
         $FileManager = new FilesManager();
-        $list = $FileManager->listFiles($startPath);
+        $list = $FileManager->listFiles();
         $data = ['user' => $_SESSION,
             'list' => $list,
-            'startPath' => $startPath];
+            'path' => $path];
         if (!empty($_POST['nameDirectory'])){
             $nameDirectory = $_POST['nameDirectory'];
             $FileManager = new FilesManager();

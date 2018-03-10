@@ -24,19 +24,17 @@ class FilesManager
     return $messagesUpload;
     }
 
-    public function setPath(){
-
-    }
-    public function listFiles($startPath)
+    public function listFiles()
     {
         $list = [];
             $path = $_GET['path'];
-            var_dump($path);
-            $file = array_diff(scandir($path), array('.', '..'));
-            foreach ($file as $value) {
-                $list[] = $value;
+            if(is_dir($path)) {
+                $file = array_diff(scandir($path), array('.', '..'));
+                foreach ($file as $value) {
+                    $list[] = $value;
+                }
             }
-            return [$list,$path];
+            return $list;
     }
 
     public function createDirectory($nameDirectory)
@@ -45,8 +43,4 @@ class FilesManager
         header('Location: ?action=files&path='.$_GET['path']);
     }
 
-    public function openDirectory()
-    {
-
-    }
 }
