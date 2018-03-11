@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}{{ parent() }} - Home{% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+        <textarea name="editFile">{{ content }}</textarea>
+        <button>Change</button>
+    </form>
+
+{% endblock %}

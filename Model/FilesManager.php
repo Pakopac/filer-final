@@ -161,6 +161,34 @@ class FilesManager
             }
             rename($path.'/'.$fileName, 'files/'.$_SESSION['pseudo'].'/'.$newPath.'/'.$fileName);
         header('Location: ?action=files&path='.$path.'#');
-    }
         }
+    }
+    public function getEdit()
+    {
+        if (isset($_GET['edit'])){
+            $path = $_GET['path'];
+            $fileName = $_GET['edit'];
+            $ext = new SplFileInfo($fileName);
+            if($ext->getExtension() === 'txt') {
+                $getEdit = fopen($path . '/' . $fileName, "r");
+                $content = fgets($getEdit, 255);
+                fclose($getEdit);
+                return $content;
+            }
+            else{
+                header('Location: ?action=files&path='.$path);
+            }
+        }
+    }
+    public function edit()
+    {
+        if(isset($_POST['editFile'])) {
+            $path = $_GET['path'];
+            $fileName = $_GET['edit'];
+            $edit = fopen($path.'/'.$fileName,"w");
+            fwrite($edit,$_POST['editFile']);
+            fclose($edit);
+            header('Location: ?action=files&path='.$path);
+        }
+    }
 }

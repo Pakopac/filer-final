@@ -215,6 +215,10 @@ body{
 #pop-up:target, #pop-upMove:target{
     display: block;
 }
+.example{
+    margin-top: 50px;
+    font-size: 30px;
+}
 .popUp {
     text-align: center;
     background-color: rgba(117, 207, 224, 0.75);
@@ -257,13 +261,13 @@ body{
     margin-top: 20%;
     width: 84%;
 }
-.icon_edit, .icon_delete,.icon_download{
+.icon_rename, .icon_delete,.icon_download,.icon_edit{
     margin-left: 10px;
     width: 27px;
     height: 27px;
     cursor: pointer;
     opacity: 0.3;
 }
-.icon_edit:hover, .icon_delete:hover, .icon_download:hover{
+.icon_rename:hover, .icon_delete:hover, .icon_download:hover,.icon_edit:hover{
     opacity: 1;
 }

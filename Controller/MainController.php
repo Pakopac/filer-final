@@ -99,4 +99,13 @@ class MainController extends BaseController
         $this -> redirectToRoute('home');
         return $this->render('home.html.twig');
     }
+    public function editAction()
+    {
+        $FileManager = new FilesManager();
+        $content = $FileManager->getEdit();
+        $FileManager->edit($content);
+        $data = ['user' => $_SESSION,
+                'content' => $content];
+        return $this->render('edit.html.twig',$data);
+    }
 }
