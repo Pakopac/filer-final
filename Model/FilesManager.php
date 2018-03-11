@@ -27,14 +27,17 @@ class FilesManager
     public function listFiles()
     {
         $list = [];
-            $path = $_GET['path'];
+        $path = $_GET['path'];
             if(is_dir($path)) {
                 $file = array_diff(scandir($path), array('.', '..'));
                 foreach ($file as $value) {
                     $list[] = $value;
                 }
             }
-            return $list;
+            else{
+                header('Location:'.$_GET['path']);
+            }
+        return $list;
     }
 
     public function createDirectory($nameDirectory)

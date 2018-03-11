@@ -22,7 +22,11 @@
     <div class="files">files</div>
     <div class="listFiles">
     {% for file in list %}
-        <a href="?action=files&path={{ path }}/{{ file }}">{{file}}</a><br>
+        {% if list == [] %}
+            <a href="?action=seeFiles">{{file}}</a><br>
+        {% else %}
+            <a href="?action=files&path={{ path }}/{{ file }}">{{file}}</a><br>
+        {% endif %}
     {% endfor %}
     </div>
 {% endblock %}

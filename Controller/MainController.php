@@ -73,18 +73,18 @@ class MainController extends BaseController
             return $this->render('files.html.twig',$data);
         }
 
+        if (!empty($_POST['nameDirectory'])){
+            $nameDirectory = $_POST['nameDirectory'];
+            $FileManager = new FilesManager();
+            $FileManager->createDirectory($nameDirectory);
+            return $this->render('files.html.twig');
+        }
+
         $FileManager = new FilesManager();
         $list = $FileManager->listFiles();
         $data = ['user' => $_SESSION,
             'list' => $list,
             'path' => $path];
-        if (!empty($_POST['nameDirectory'])){
-            $nameDirectory = $_POST['nameDirectory'];
-            $FileManager = new FilesManager();
-            $directory = $FileManager->createDirectory($nameDirectory);
-            $data .= ['directory' => $directory];
-            return $this->render('files.html.twig',$data);
-        }
         return $this->render('files.html.twig',$data);
     }
     public function logoutAction()
