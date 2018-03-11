@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block page_title %}{{ parent() }} - login{% endblock %}
+{% block page_title %}{{ parent() }} - Files{% endblock %}
 
 {% block content %}
         <p class="home">Upload Files</p>
@@ -21,18 +21,21 @@
         <button class="btnCreate">Create</button>
     </form>
 
-    <div class="files">files</div>
+    <div class="files">Files</div>
     <div class="listFiles">
-    {% for fileName in file %}
-        <a class="list" href="?action=files&path={{ path }}/{{ fileName }}">{{fileName}}</a>
-        <a href="?action=files&path={{ path }}&name={{ fileName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
-        <a href="?action=files&path={{ path }}&delete={{ fileName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a><br>
+    {% for directoryName in directory %}
+        <img class="icon_dir" src="assets/img/icon_dir.jpg">
+        <a class="list" href="?action=files&path={{ path }}/{{ directoryName }}">{{directoryName}}</a>
+        <a href="?action=files&path={{ path }}&name={{ directoryName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
+        <a href="?action=files&path={{ path }}&delete={{ directoryName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a><br>
     {% endfor %}
-        {% for directoryName in directory %}
-            <a class="list" href="?action=files&path={{ path }}/{{ directoryName }}">{{directoryName}}</a>
-            <a href="?action=files&path={{ path }}&name={{ directoryName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
-            <a href="?action=files&path={{ path }}&delete={{ directoryName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a><br>
-        {% endfor %}
+    {% for fileName in file %}
+        <img class="iconFileList" src="assets/img/icon_file.png">
+        <a class="list" href="{{ path }}/{{ fileName }}">{{fileName}}</a>
+        <a href="?action=files&path={{ path }}&name={{ fileName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
+        <a href="?action=files&path={{ path }}&delete={{ fileName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a>
+        <a href="?action=files&path={{ path }}&download={{ fileName }}"><img class="icon_delete" src="assets/img/icon_download.png" alt="icon delete"></a><br>
+    {% endfor %}
         <div id="pop-up">
             <div class="popUp">
                 <form class="formPopUp" method="POST">

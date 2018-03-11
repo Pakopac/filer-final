@@ -32,24 +32,21 @@ class FilesManager
 
     public function listFiles()
     {
-        $file = [];
         $directory = [];
+        $file = [];
         $path = $_GET['path'];
             if(is_dir($path)) {
                 $list = array_diff(scandir($path), array('.', '..'));
                 foreach ($list as $value) {
                     if(is_dir($path.'/'.$value)) {
-                        $file[] = $value;
+                        $directory[] = $value;
                     }
                     elseif(is_file($path.'/'.$value)){
-                        $directory[] = $value;
+                        $file[] = $value;
                     }
                 }
             }
-            else{
-                header('Location:'.$path);
-            }
-        return [$file,$directory];
+        return [$directory,$file];
     }
 
     public function createDirectory($nameDirectory)
@@ -99,6 +96,21 @@ class FilesManager
             }
             unlink($path . '/' . $delete);
             header('Location: ?action=files&path='.$path);
+        }
+    }
+
+    public function download()
+    {
+        if (!empty($_GET['download'])) {
+            $path = $_GET['path'];
+            $file = $_GET['download'];
+
+            header("Content-Description: File Transfer");
+            header("Content-Type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=".basename($path.'/'.$file));
+
+            readfile ($path.'/'.$file);
+            exit();
         }
     }
 }
