@@ -35,7 +35,7 @@ class FilesManager
         $directory = [];
         $file = [];
         $path = $_GET['path'];
-            if(is_dir($path)) {
+                if(is_dir($path) && $path!== 'files') {
                 $list = array_diff(scandir($path), array('.', '..'));
                 foreach ($list as $value) {
                     if(is_dir($path.'/'.$value)) {

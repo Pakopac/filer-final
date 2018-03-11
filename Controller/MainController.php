@@ -103,6 +103,9 @@ class MainController extends BaseController
         }
 
         $path = $_GET['path'];
+        if($path === 'files'){
+            $LogManager -> securityLog($_SESSION['pseudo']." try to see files directory \n");
+        }
         if(isset($_FILES['inputFile'])){
             $LogManager -> accessLog($_SESSION['pseudo']." upload a file \n");
             $FileManager = new FilesManager();
