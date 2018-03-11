@@ -14,8 +14,8 @@
         {% for message in messagesUpload %}
             <div class="messagesUpload">{{ message }}</div>
         {% endfor %}
-    <div class="createDirectory"> Create a directory: </div>
-    <form method="POST">
+    <div class="createDirectory"> Create a directory:  <img class="icon_dir" src="assets/img/icon_dir"></div>
+    <form class="formDir" method="POST">
         <br>
         name: <input name="nameDirectory" type="text"><br>
         <button class="btnCreate">Create</button>

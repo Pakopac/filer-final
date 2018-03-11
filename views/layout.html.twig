@@ -13,8 +13,8 @@
   {% endif %}
     <a class="hom" href="?action=home">Home</a><br>
     {% if user %}
-      <a class="bum" href="?action=files&path=files/{{ user['pseudo'] }}">Files</a><br>
-        <a class="logi" href="?action=logout">Logout</a><br>
+      <a class="gum" href="?action=files&path=files/{{ user['pseudo'] }}">Files</a><br>
+        <a class="regi" href="?action=logout">Logout</a><br>
     {% else %}
       <a class="gum" href="?action=login">Login</a><br>
       <a class="regi" href="?action=register">Register</a>
