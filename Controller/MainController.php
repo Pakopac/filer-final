@@ -83,6 +83,7 @@ class MainController extends BaseController
         $FileManager = new FilesManager();
         $list = $FileManager->listFiles();
         $FileManager->rename();
+        $FileManager->delete();
         $data = ['user' => $_SESSION,
             'list' => $list,
             'path' => $path];

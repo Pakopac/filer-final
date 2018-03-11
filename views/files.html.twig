@@ -25,8 +25,8 @@
     <div class="listFiles">
     {% for file in list %}
         <a class="list" href="?action=files&path={{ path }}/{{ file }}">{{file}}</a>
-        <a href="?action=files&path={{ path }}&name={{ file }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a><br>
-
+        <a href="?action=files&path={{ path }}&name={{ file }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
+        <a href="?action=files&path={{ path }}&delete={{ file }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a><br>
         <div id="pop-up">
             <div class="popUp">
                 <form class="formPopUp" method="POST">
@@ -34,7 +34,7 @@
                         <li class="exitPopup"><a href="#">X</a></li>
                         <li class="edit">Change the File name</li>
                         <li><input type="text" name="newName" class="inputEdit" value="{{ file }}"></li>
-                        <li><a href="#"><button class="btnForm" id="btnEdit">Enter</button></a></li>
+                        <li><button class="btnForm" id="btnEdit">Enter</button></li>
                     </ul>
                 </form>
             </div>

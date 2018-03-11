@@ -62,7 +62,37 @@ class FilesManager
                 rename($path.'/'.$name, $path.'/'.$_POST['newName'].'.'.$ext->getExtension());
             }
             rename($path.'/'.$name, $path.'/'.$_POST['newName']);
-            header('Location: ?action=files&path='.$path.'&name='.$_POST['newName']);
+            header('Location: ?action=files&path='.$path.'#');
+        }
+    }
+    public function delete()
+    {
+        if (!empty($_GET['delete'])) {
+            $path = $_GET['path'];
+            $delete = $_GET['delete'];
+            if (is_dir($path . '/' . $delete)) {
+                $dir = $path . '/' . $delete;
+                function deleteFile($dir)
+                {
+                    $file = array_diff(scandir($dir), array('.', '..'));
+                    foreach ($file as $value) {
+
+                        if (is_file($dir . '/' . $value)) {
+                            unlink($dir . '/' . $value);
+                        }
+                        else {
+                            if(!empty(deleteFile($dir . '/' . $value)));
+                                else {
+                                    rmdir($dir . '/' . $value);
+                                }
+                            }
+                    }
+                }
+                deleteFile($dir);
+                rmdir($path . '/' . $delete);
+            }
+            unlink($path . '/' . $delete);
+            header('Location: ?action=files&path='.$path);
         }
     }
 }
