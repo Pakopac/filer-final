@@ -24,16 +24,18 @@
     <div class="files">Files</div>
     <div class="listFiles">
     {% for directoryName in directory %}
-        <img class="icon_dir" src="assets/img/icon_dir.jpg">
+        <img class="icon_dir" src="assets/img/icon_dir.png">
         <a class="list" href="?action=files&path={{ path }}/{{ directoryName }}">{{directoryName}}</a>
         <a href="?action=files&path={{ path }}&name={{ directoryName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
-        <a href="?action=files&path={{ path }}&delete={{ directoryName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a><br>
+        <a href="?action=files&path={{ path }}&delete={{ directoryName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a>
+        <a href="?action=files&path={{ path }}&move={{ directoryName }}#pop-upMove"><img class="icon_delete" src="assets/img/icon_move.png" alt="icon move"></a><br>
     {% endfor %}
     {% for fileName in file %}
         <img class="iconFileList" src="assets/img/icon_file.png">
         <a class="list" href="{{ path }}/{{ fileName }}">{{fileName}}</a>
         <a href="?action=files&path={{ path }}&name={{ fileName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
         <a href="?action=files&path={{ path }}&delete={{ fileName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a>
+        <a href="?action=files&path={{ path }}&move={{ fileName }}#pop-upMove"><img class="icon_delete" src="assets/img/icon_move.png" alt="icon move"></a>
         <a href="?action=files&path={{ path }}&download={{ fileName }}"><img class="icon_download" src="assets/img/icon_download.png" alt="icon delete"></a><br>
     {% endfor %}
         <br>
@@ -46,6 +48,19 @@
                         <li class="exitPopup"><a href="#">X</a></li>
                         <li class="edit">Change the File name</li>
                         <li><input type="text" name="newName" class="inputEdit" value=""></li>
+                        <li><button class="btnForm" id="btnEdit">Enter</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <div id="pop-upMove">
+            <div class="popUp">
+                <form class="formPopUp" method="POST">
+                    <ul>
+                        <li class="exitPopup"><a href="#">X</a></li>
+                        <li class="edit">Write the new directory</li>
+                        <li><input type="text" name="moveFile" class="inputEdit" value=""></li>
                         <li><button class="btnForm" id="btnEdit">Enter</button></li>
                     </ul>
                 </form>

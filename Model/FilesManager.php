@@ -116,11 +116,51 @@ class FilesManager
 
     public function back()
     {
-        if(!empty($_GET['back'])){
+        if(!empty($_GET['back'])) {
             $path = $_GET['path'];
-            strrchr($path,'/');
-            $path = str_replace(strrchr($path,'/'),'',$path);
-            header('Location:?action=files&path='.$path);
+            if ($path !== 'files/' . $_SESSION['pseudo']) {
+                strrchr($path, '/');
+                $path = str_replace(strrchr($path, '/'), '', $path);
+                header('Location:?action=files&path=' . $path);
+            }
+            else{
+                header('Location:?action=files&path=' . $path);
+            }
         }
     }
+    public function move()
+    {
+        if (isset($_GET['move']) && isset($_POST['moveFile'])) {
+            $path = $_GET['path'];
+            $fileName = $_GET['move'];
+            $newPath = $_POST['moveFile'];
+            if (is_dir($path.'/'.$fileName)) {
+                $dir = $path . '/' . $fileName;
+                function moveFile($dir)
+                {
+                    $file = array_diff(scandir($dir), array('.', '..'));
+                    foreach ($file as $value) {
+
+                        if (is_file($dir . '/' . $value)) {
+                            $fileName = $_GET['move'];
+                            $newPath = $_POST['moveFile'];
+                            rename($dir . '/' . $value,$newPath.'/'.$fileName.'/'.$value);
+                        }
+                        else {
+                            if(!empty(moveFile($dir . '/' . $value)));
+                            else {
+                                $fileName = $_GET['move'];
+                                $newPath = $_POST['moveFile'];
+                                rename($dir . '/' . $value,$newPath.'/'.$fileName.'/'.$value);
+                            }
+                        }
+                    }
+                }
+                rename($path.'/'.$fileName, 'files/'.$_SESSION['pseudo'].'/'.$newPath.'/'.$fileName);
+                moveFile($dir);
+            }
+            rename($path.'/'.$fileName, 'files/'.$_SESSION['pseudo'].'/'.$newPath.'/'.$fileName);
+        header('Location: ?action=files&path='.$path.'#');
+    }
+        }
 }

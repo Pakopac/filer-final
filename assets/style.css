@@ -44,7 +44,7 @@ li{
     height: 100px;
     opacity: 0.3;
 }
-.icon_arrow {
+.arrow {
     margin-right: 20px;
     transform: rotate(320deg);
 }
@@ -205,14 +205,14 @@ input{
 body{
     background-color: aliceblue;
 }
-#pop-up{
+#pop-up, #pop-upMove{
     display: none;
     position: fixed;
     top:0; right:0; bottom:0; left:0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
-#pop-up:target{
+#pop-up:target, #pop-upMove:target{
     display: block;
 }
 .popUp {
