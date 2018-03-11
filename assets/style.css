@@ -20,7 +20,7 @@
 .labelFile{
     border: 1px solid black;
     padding: 150px;
-    margin-left: -50%;
+    margin-left: -40%;
 }
 .labelFile:hover .icon_file, .labelFile:hover .spear{
     opacity: 1;
@@ -30,7 +30,10 @@
     background: #d5d5d5;
 }
 .inputFile{
-    display: none;
+    position: absolute;
+    margin-top: 220px;
+    margin-left: -300px;
+    border: 0;
 }
 .icon_file, .spear{
     margin-bottom: -50px;
@@ -56,6 +59,9 @@
 }
 .listFiles{
     text-align: center;
+}
+.nameFile{
+    margin-top: 200px;
 }
 body{
     background-color:white;

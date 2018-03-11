@@ -7,7 +7,9 @@
         <div class="messageUpload">Upload your files here :</div>
         <form class="formUpload" name="upload" method="POST" enctype="multipart/form-data">
             <label for="file" class="labelFile"><img class="spear" src="assets/img/spear.png" alt="icon spire"><img class="icon_file" src="assets/img/icon_file.png" alt="icon file"></label>
-            <input type="file" id="file" name="inputFile" class="inputFile" onchange="this.form.submit();">
+            <input type="file" id="file" name="inputFile" class="inputFile" onchange="">
+            <br>name: <input type="text" name="nameFile" class="nameFile">
+            <button>Upload</button>
         </form>
         {% for message in messagesUpload %}
             <div class="messagesUpload">{{ message }}</div>
@@ -22,11 +24,7 @@
     <div class="files">files</div>
     <div class="listFiles">
     {% for file in list %}
-        {% if list == [] %}
-            <a href="?action=seeFiles">{{file}}</a><br>
-        {% else %}
-            <a href="?action=files&path={{ path }}/{{ file }}">{{file}}</a><br>
-        {% endif %}
+        <a href="?action=files&path={{ path }}/{{ file }}">{{file}}</a><br>
     {% endfor %}
     </div>
 {% endblock %}

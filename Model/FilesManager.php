@@ -9,7 +9,13 @@ class FilesManager
         $messagesUpload = [];
         if(isset($_FILES['inputFile'])) {
             $uploaddir = $_GET['path'];
-            $file = basename($_FILES['inputFile']['name']);
+            if (!empty($_POST['nameFile'])){
+                $ext = new SplFileInfo($_FILES['inputFile']['name']);
+                $file = basename($_POST['nameFile'].'.'.$ext->getExtension());
+            }
+            else {
+                $file = basename($_FILES['inputFile']['name']);
+            }
         if(file_exists($uploaddir.'/'.$file)){
             $messagesUpload[] = 'Error: File already exist';
         }
