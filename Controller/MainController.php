@@ -85,6 +85,7 @@ class MainController extends BaseController
         $FileManager->rename();
         $FileManager->delete();
         $FileManager->download();
+        $FileManager->back();
         $data = ['user' => $_SESSION,
             'file' => $file,
             'directory' => $directory,

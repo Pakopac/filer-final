@@ -6,7 +6,7 @@
         <p class="home">Upload Files</p>
         <div class="messageUpload">Upload your files here :</div>
         <form class="formUpload" name="upload" method="POST" enctype="multipart/form-data">
-            <label for="file" class="labelFile"><img class="spear" src="assets/img/spear.png" alt="icon spire"><img class="icon_file" src="assets/img/icon_file.png" alt="icon file"></label>
+            <label for="file" class="labelFile"><img class="icon_arrow" src="assets/img/icon_arrow.png" alt="icon arrow"><img class="icon_file" src="assets/img/icon_file.png" alt="icon file"></label>
             <input type="file" id="file" name="inputFile" class="inputFile" onchange="">
             <br>name: <input type="text" name="nameFile" class="nameFile">
             <button>Upload</button>
@@ -34,8 +34,11 @@
         <a class="list" href="{{ path }}/{{ fileName }}">{{fileName}}</a>
         <a href="?action=files&path={{ path }}&name={{ fileName }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a>
         <a href="?action=files&path={{ path }}&delete={{ fileName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a>
-        <a href="?action=files&path={{ path }}&download={{ fileName }}"><img class="icon_delete" src="assets/img/icon_download.png" alt="icon delete"></a><br>
+        <a href="?action=files&path={{ path }}&download={{ fileName }}"><img class="icon_download" src="assets/img/icon_download.png" alt="icon delete"></a><br>
     {% endfor %}
+        <br>
+        <img class="icon_arrow_back" src="assets/img/icon_arrow_back">
+        <a class="list" href="?action=files&path={{ path }}&back=true">back</a>
         <div id="pop-up">
             <div class="popUp">
                 <form class="formPopUp" method="POST">

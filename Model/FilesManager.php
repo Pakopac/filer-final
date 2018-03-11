@@ -113,4 +113,14 @@ class FilesManager
             exit();
         }
     }
+
+    public function back()
+    {
+        if(!empty($_GET['back'])){
+            $path = $_GET['path'];
+            strrchr($path,'/');
+            $path = str_replace(strrchr($path,'/'),'',$path);
+            header('Location:?action=files&path='.$path);
+        }
+    }
 }
