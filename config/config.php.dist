@@ -14,5 +14,6 @@ $config = [
         'logout'   => 'Main:logout',
         'register' => 'Main:register',
         'files'    => 'Main:files',
+        'edit'     => 'Main:edit'
     ]
 ];
