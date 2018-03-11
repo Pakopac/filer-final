@@ -24,7 +24,21 @@
     <div class="files">files</div>
     <div class="listFiles">
     {% for file in list %}
-        <a href="?action=files&path={{ path }}/{{ file }}">{{file}}</a><br>
+        <a class="list" href="?action=files&path={{ path }}/{{ file }}">{{file}}</a>
+        <a href="?action=files&path={{ path }}&name={{ file }}#pop-up"><img class="icon_edit" src="assets/img/icon_edit.png" alt="icon edit"></a><br>
+
+        <div id="pop-up">
+            <div class="popUp">
+                <form class="formPopUp" method="POST">
+                    <ul>
+                        <li class="exitPopup"><a href="#">X</a></li>
+                        <li class="edit">Change the File name</li>
+                        <li><input type="text" name="newName" class="inputEdit" value="{{ file }}"></li>
+                        <li><a href="#"><button class="btnForm" id="btnEdit">Enter</button></a></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
     {% endfor %}
     </div>
 {% endblock %}

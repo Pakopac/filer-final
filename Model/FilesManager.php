@@ -52,4 +52,17 @@ class FilesManager
         header('Location: ?action=files&path='.$_GET['path']);
     }
 
+    public function rename()
+    {
+        if(!empty($_POST['newName'])){
+            $path = $_GET['path'];
+            $name = $_GET['name'];
+            if(is_file($path.'/'.$name)){
+                $ext = new SplFileInfo($name);;
+                rename($path.'/'.$name, $path.'/'.$_POST['newName'].'.'.$ext->getExtension());
+            }
+            rename($path.'/'.$name, $path.'/'.$_POST['newName']);
+            header('Location: ?action=files&path='.$path.'&name='.$_POST['newName']);
+        }
+    }
 }
