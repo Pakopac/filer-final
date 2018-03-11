@@ -81,11 +81,12 @@ class MainController extends BaseController
         }
 
         $FileManager = new FilesManager();
-        $list = $FileManager->listFiles();
+        list($file,$directory) = $FileManager->listFiles();
         $FileManager->rename();
         $FileManager->delete();
         $data = ['user' => $_SESSION,
-            'list' => $list,
+            'file' => $file,
+            'directory' => $directory,
             'path' => $path];
         return $this->render('files.html.twig',$data);
     }

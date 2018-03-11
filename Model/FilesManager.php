@@ -32,18 +32,24 @@ class FilesManager
 
     public function listFiles()
     {
-        $list = [];
+        $file = [];
+        $directory = [];
         $path = $_GET['path'];
             if(is_dir($path)) {
-                $file = array_diff(scandir($path), array('.', '..'));
-                foreach ($file as $value) {
-                    $list[] = $value;
+                $list = array_diff(scandir($path), array('.', '..'));
+                foreach ($list as $value) {
+                    if(is_dir($path.'/'.$value)) {
+                        $file[] = $value;
+                    }
+                    elseif(is_file($path.'/'.$value)){
+                        $directory[] = $value;
+                    }
                 }
             }
             else{
-                header('Location:'.$_GET['path']);
+                header('Location:'.$path);
             }
-        return $list;
+        return [$file,$directory];
     }
 
     public function createDirectory($nameDirectory)
