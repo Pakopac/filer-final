@@ -8,10 +8,12 @@ class UserManager
     {
         $dbm = DBManager::getInstance();
         $pdo = $dbm->getPdo();
+        $salt = 'Me3hgw2dgfySVgx7';
+        $pw_hash = md5($salt . $password);
 
         $result = $pdo->prepare("SELECT * FROM users WHERE password = :password AND pseudo = :pseudo");
         $result->bindParam(':pseudo', $pseudo);
-        $result->bindParam(':password', $password);
+        $result->bindParam(':password', $pw_hash);
         $result->execute();
         $user = $result -> fetch();
         $_SESSION = $user;
@@ -38,19 +40,21 @@ class UserManager
         if($errors === []) {
             $dbm = DBManager::getInstance();
             $pdo = $dbm->getPdo();
+            $salt = 'Me3hgw2dgfySVgx7';
+            $pw_hash = md5($salt . $password);
 
             $stmt = $pdo->prepare("INSERT INTO `users` (`id`, `firstname`, `lastname`, `pseudo`, `email`, `password`) VALUES (NULL, :firstname, :lastname, :pseudo, :email, :password)");
             $stmt->bindParam(':firstname', $firstname);
             $stmt->bindParam(':lastname', $lastname);
             $stmt->bindParam(':pseudo', $pseudo);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':password', $pw_hash);
 
             $stmt->execute();
 
             $result = $pdo->prepare("SELECT * FROM users WHERE password = :password AND pseudo = :pseudo");
             $result->bindParam(':pseudo', $pseudo);
-            $result->bindParam(':password', $password);
+            $result->bindParam(':password', $pw_hash);
             $result->execute();
             $user = $result->fetch();
             $_SESSION['id'] = $user['id'];

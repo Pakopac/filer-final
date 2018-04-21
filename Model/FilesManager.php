@@ -10,22 +10,24 @@ class FilesManager
         if(isset($_FILES['inputFile'])) {
             $uploaddir = $_GET['path'];
             if (!empty($_POST['nameFile'])){
+                $name = str_replace('/','',$_POST['nameFile']);
+                $name = str_replace('..','',$_POST['nameFile']);
                 $ext = new SplFileInfo($_FILES['inputFile']['name']);
-                $file = basename($_POST['nameFile'].'.'.$ext->getExtension());
+                $file = basename($name.'.'.$ext->getExtension());
             }
             else {
                 $file = basename($_FILES['inputFile']['name']);
             }
-        if(file_exists($uploaddir.'/'.$file)){
-            $messagesUpload[] = 'Error: File already exist';
+            if(file_exists($uploaddir.'/'.$file)){
+                $messagesUpload[] = 'Error: File already exist';
+            }
+            elseif(move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir. '/' . $file)) {
+                $messagesUpload[] = 'File send !';
+            }
+            else {
+                $messagesUpload[] = 'Error: File not send !';
+            }
         }
-        elseif(move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir. '/' . $file)) {
-            $messagesUpload[] = 'File send !';
-        }
-        else {
-            $messagesUpload[] = 'Error: File not send !';
-        }
-    }
     header('Location: ?action=files&path='.$_GET['path'].'&user='.$_GET['user'].'#listFiles');
     return $messagesUpload;
     }
@@ -67,8 +69,10 @@ class FilesManager
             $path = $_GET['path'];
             $name = $_GET['name'];
             if(is_file($path.'/'.$name)){
+                $newName = str_replace('/','',$_POST['newName']);
+                $newName = str_replace('..','',$_POST['newName']);
                 $ext = new SplFileInfo($name);;
-                rename($path.'/'.$name, $path.'/'.$_POST['newName'].'.'.$ext->getExtension());
+                rename($path.'/'.$name, $path.'/'.$newName.'.'.$ext->getExtension());
             }
             rename($path.'/'.$name, $path.'/'.$_POST['newName']);
             header('Location: ?action=files&path='.$path.'&user='.$_GET['user'].'#listFiles');
