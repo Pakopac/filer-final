@@ -170,4 +170,11 @@ class MainController extends BaseController
             return $this->render('edit.html.twig', $data);
         }
     }
+    public function viewAction()
+    {   $FileManager = new FilesManager();
+        $content = $FileManager -> getView();
+        $data = ['user' => $_SESSION,
+            'content' => $content];
+        return $this->render('view.html.twig',$data);
+    }
 }

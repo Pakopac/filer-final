@@ -26,7 +26,7 @@ class FilesManager
             $messagesUpload[] = 'Error: File not send !';
         }
     }
-    header('Location: ?action=files&path='.$_GET['path']);
+    header('Location: ?action=files&path='.$_GET['path'].'&user='.$_GET['user'].'#listFiles');
     return $messagesUpload;
     }
 
@@ -35,24 +35,30 @@ class FilesManager
         $directory = [];
         $file = [];
         $path = $_GET['path'];
-                if(is_dir($path) && $path!== 'files') {
+        $user = $_GET['user'];
+        if($user == $_SESSION['pseudo']) {
+            if (is_dir($path) && $path !== 'files') {
                 $list = array_diff(scandir($path), array('.', '..'));
                 foreach ($list as $value) {
-                    if(is_dir($path.'/'.$value)) {
+                    if (is_dir($path . '/' . $value)) {
                         $directory[] = $value;
-                    }
-                    elseif(is_file($path.'/'.$value)){
+                    } elseif (is_file($path . '/' . $value)) {
                         $file[] = $value;
                     }
                 }
             }
-        return [$directory,$file];
+            return [$directory, $file];
+        }
+        else{
+            return [];
+        }
+
     }
 
     public function createDirectory($nameDirectory)
     {
         mkdir($_GET['path'].'/'.$nameDirectory);
-        header('Location: ?action=files&path='.$_GET['path']);
+        header('Location: ?action=files&path='.$_GET['path'].'&user='.$_GET['user'].'#listFiles');
     }
 
     public function rename()
@@ -65,7 +71,7 @@ class FilesManager
                 rename($path.'/'.$name, $path.'/'.$_POST['newName'].'.'.$ext->getExtension());
             }
             rename($path.'/'.$name, $path.'/'.$_POST['newName']);
-            header('Location: ?action=files&path='.$path.'#listFiles');
+            header('Location: ?action=files&path='.$path.'&user='.$_GET['user'].'#listFiles');
         }
     }
     public function delete()
@@ -95,7 +101,7 @@ class FilesManager
                 rmdir($path . '/' . $delete);
             }
             unlink($path . '/' . $delete);
-            header('Location: ?action=files&path='.$path.'#listFiles');
+            header('Location: ?action=files&path='.$path.'&user='.$_GET['user'].'#listFiles');
         }
     }
 
@@ -121,10 +127,10 @@ class FilesManager
             if ($path !== 'files/' . $_SESSION['pseudo']) {
                 strrchr($path, '/');
                 $path = str_replace(strrchr($path, '/'), '', $path);
-                header('Location:?action=files&path=' . $path);
+                header('Location:?action=files&path=' . $path.'&user='.$_GET['user']);
             }
             else{
-                header('Location:?action=files&path=' . $path);
+                header('Location:?action=files&path='.$path.'&user='.$_GET['user']);
             }
         }
     }
@@ -160,7 +166,7 @@ class FilesManager
                 moveFile($dir);
             }
             rename($path.'/'.$fileName, 'files/'.$_SESSION['pseudo'].'/'.$newPath.'/'.$fileName);
-        header('Location: ?action=files&path='.$path.'#listFiles');
+        header('Location: ?action=files&path='.$path.'&user='.$_GET['user'].'#listFiles');
         }
     }
     public function getEdit()
@@ -176,7 +182,7 @@ class FilesManager
                 return $content;
             }
             else{
-                header('Location: ?action=files&path='.$path);
+                header('Location: ?action=files&path='.$path.'&user='.$_GET['user']);
             }
         }
     }
@@ -188,7 +194,56 @@ class FilesManager
             $edit = fopen($path.'/'.$fileName,"w");
             fwrite($edit,$_POST['editFile']);
             fclose($edit);
-            header('Location: ?action=files&path='.$path);
+            header('Location: ?action=files&path='.$path.'&user='.$_GET['user']);
         }
+    }
+    public function getView()
+    {
+        $path = $_GET['path'];
+        $fileName = $_GET['file'];
+        $ext = new SplFileInfo($fileName);
+        if ($ext->getExtension() === 'txt') {
+            $content = file_get_contents($path);
+            return $content;
+        }
+        elseif ($ext->getExtension() === 'png') {
+            header('Content-Type: image/x-png');
+            $content =  readfile($path);
+            return $content;
+        }
+        elseif ($ext->getExtension() === 'jpg') {
+            header('Content-Type: image/jpg');
+            $content =  readfile($path);
+            return $content;
+        }
+        elseif ($ext->getExtension() === 'mp3') {
+            header('Content-Type: audio/mp3');
+            $content =  readfile($path);
+            return $content;
+        }
+        elseif ($ext->getExtension() === 'wav') {
+            header('Content-Type: audio/wav');
+            $content =  readfile($path);
+            return $content;
+        }
+        elseif ($ext->getExtension() === 'mp4') {
+            header('Content-Type: video/mp4');
+            $content =  readfile($path);
+            return $content;
+        }
+        elseif ($ext->getExtension() === 'avi') {
+            header('Content-Type: video/avi');
+            $content =  readfile($path);
+            return $content;
+        }
+        else{
+            header("Content-Description: File Transfer");
+            header("Content-Type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=".basename($path));
+
+            readfile ($path);
+            exit();
+        }
+
     }
 }
