@@ -6,7 +6,8 @@ class FilesManager
 {
     public function uploadFiles()
     {
-        $messagesUpload = [];
+        $messagesUploadSuccess = '';
+        $messagesUploadError = '';
         if(isset($_FILES['inputFile'])) {
             $uploaddir = $_GET['path'];
             if (!empty($_POST['nameFile'])){
@@ -19,17 +20,16 @@ class FilesManager
                 $file = basename($_FILES['inputFile']['name']);
             }
             if(file_exists($uploaddir.'/'.$file)){
-                $messagesUpload[] = 'Error: File already exist';
+                $messagesUploadError = 'Error: File already exist';
             }
             elseif(move_uploaded_file($_FILES['inputFile']['tmp_name'], $uploaddir. '/' . $file)) {
-                $messagesUpload[] = 'File send !';
+                $messagesUploadSuccess = 'File send !';
             }
             else {
-                $messagesUpload[] = 'Error: File not send !';
+                $messagesUploadError = 'Error: File not send !';
             }
+            return [$messagesUploadSuccess,$messagesUploadError];
         }
-    header('Location: ?action=files&path='.$_GET['path'].'&user='.$_GET['user'].'#listFiles');
-    return $messagesUpload;
     }
 
     public function listFiles()

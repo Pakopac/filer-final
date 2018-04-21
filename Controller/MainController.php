@@ -109,11 +109,11 @@ class MainController extends BaseController
         if(isset($_FILES['inputFile'])){
             $LogManager -> accessLog($_SESSION['pseudo']." upload a file \n");
             $FileManager = new FilesManager();
-            $messagesUpload = $FileManager->uploadFiles();
+            list($messageUploadSuccess,$messageUploadError) = $FileManager->uploadFiles();
             $data = ['file' => $_FILES,
                 'user' => $_SESSION,
-                'messagesUpload' => $messagesUpload];
-            return $this->render('files.html.twig',$data);
+               ];
+           header('files&path='.$_GET['path'].'&user='.$_GET['user'].'#listFiles');
         }
 
         if (!empty($_POST['nameDirectory'])){
@@ -149,7 +149,9 @@ class MainController extends BaseController
         $data = ['user' => $_SESSION,
             'file' => $file,
             'directory' => $directory,
-            'path' => $path];
+            'path' => $path,
+         'messagesUploadSuccess' => $messageUploadSuccess,
+            'messagesUploadError' => $messageUploadError];
         return $this->render('files.html.twig',$data);
     }
 

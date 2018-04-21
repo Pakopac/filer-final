@@ -19,10 +19,9 @@
                     <input type="text" name="nameFile" class="nameFile form-control">
                     <button class="btn btn-primary btnUploadFile">Upload</button>
                 </div>
+                <div class="messagesUploadSuccess">{{ messagesUploadSuccess }}</div>
+                <div class="messagesUploadError">{{ messagesUploadError }}</div>
             </form>
-            {% for message in messagesUpload %}
-                <div class="messagesUpload">{{ message }}</div>
-            {% endfor %}
         </div>
 
         <div class="upload_createDir">

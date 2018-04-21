@@ -93,6 +93,16 @@ input{
 .formUpload{
     text-align: center;
 }
+.messagesUploadSuccess{
+    margin-top: 20px;
+    font-size: 30px;
+    color: green;
+}
+.messagesUploadError{
+    margin-top: 20px;
+    font-size: 30px;
+    color: red;
+}
 .messageName{
     margin: 0 50%;
     font-size: 30px;
