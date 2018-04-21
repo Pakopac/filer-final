@@ -65,7 +65,7 @@ class FilesManager
                 rename($path.'/'.$name, $path.'/'.$_POST['newName'].'.'.$ext->getExtension());
             }
             rename($path.'/'.$name, $path.'/'.$_POST['newName']);
-            header('Location: ?action=files&path='.$path.'#');
+            header('Location: ?action=files&path='.$path.'#listFiles');
         }
     }
     public function delete()
@@ -95,7 +95,7 @@ class FilesManager
                 rmdir($path . '/' . $delete);
             }
             unlink($path . '/' . $delete);
-            header('Location: ?action=files&path='.$path);
+            header('Location: ?action=files&path='.$path.'#listFiles');
         }
     }
 
@@ -160,7 +160,7 @@ class FilesManager
                 moveFile($dir);
             }
             rename($path.'/'.$fileName, 'files/'.$_SESSION['pseudo'].'/'.$newPath.'/'.$fileName);
-        header('Location: ?action=files&path='.$path.'#');
+        header('Location: ?action=files&path='.$path.'#listFiles');
         }
     }
     public function getEdit()

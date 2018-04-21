@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <title>{% block page_title %}Filer{% endblock %}</title>
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
-  {% if user %}
-   <div class="not"> Logged in as <br>{{user['pseudo']}} </div><br><br>
-  {% else %} <br><br>
-    <div class="not">Not logged in </div><br><br><br>
-  {% endif %}
-    <a class="hom" href="?action=home">Home</a><br>
+    <header class="header">
+        <h1 class="h1">FILER</h1>
+        <a href="?action=home">Home</a>
     {% if user %}
-      <a class="gum" href="?action=files&path=files/{{ user['pseudo'] }}">Files</a><br>
-        <a class="regi" href="?action=logout">Logout</a><br>
+        <a href="?action=files&path=files/{{ user['pseudo'] }}">Files</a>
+        <a href="?action=logout">Logout</a>
     {% else %}
-      <a class="gum" href="?action=login">Login</a><br>
-      <a class="regi" href="?action=register">Register</a>
+        <a href="?action=login">Login</a>
+        <a href="?action=register">Register</a>
     {% endif %}
-    {% block content %}{% endblock %}
+    </header>
+   <div class="content"> {% block content %}{% endblock %}</div>
+    {% if user['pseudo'] %}
+        <footer> Hello {{ user['pseudo'] }} </footer>
+    {% else %}
+        <footer> Hello visitor </footer>
+    {% endif %}
   </body>
 </html>

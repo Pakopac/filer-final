@@ -4,10 +4,13 @@
 
 {% block content %}
     <div class="login">
-        <form method="POST" action="?action=login">
-        <input class="boxe" name="loginPseudo" type="text" placeholder="Pseudo"><br>
-        <input class="boxe" name="loginPassword" type="password" placeholder="Password"><br><br>
-        <button class="btn">Enter</button>
+        <form method="POST" action="?action=login" role="form" class="formLogin">
+            <h2>Login</h2>
+            <div class="form-group">
+                <input class="form-control" name="loginPseudo" type="text" placeholder="Pseudo"><br>
+                <input class="form-control" name="loginPassword" type="password" placeholder="Password"><br><br>
+                <button class="btn btn-primary">Enter</button>
+            </div>
         </form>
     </div>
     <div class="errorsLogin">{{ errors }}</div>

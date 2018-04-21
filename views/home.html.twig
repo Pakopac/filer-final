@@ -3,8 +3,12 @@
 {% block page_title %}{{ parent() }} - Home{% endblock %}
 
 {% block content %}<br><br>
-<div class="home">
-  Home page
-</div>
-   <div class="hell"> Hello<br>{{ user['pseudo'] }} </div>
+    <h2>Home</h2>
+    <div class="homeMessage">
+        {% if user['pseudo'] %}
+            This is the home page of filer, go to files to upload and check your files
+        {% else %}
+            Welcome to the filer site, you need to register to upload a file
+        {% endif %}
+    </div>
 {% endblock %}

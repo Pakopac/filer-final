@@ -3,29 +3,48 @@
 {% block page_title %}{{ parent() }} - Files{% endblock %}
 
 {% block content %}
-        <p class="home">Upload Files</p>
-        <div class="messageUpload">Upload your files here :</div>
-        <form class="formUpload" name="upload" method="POST" enctype="multipart/form-data">
-            <label for="file" class="labelFile"><img class="icon_arrow" src="assets/img/icon_arrow.png" alt="icon arrow"><img class="icon_file" src="assets/img/icon_file.png" alt="icon file"></label>
-            <input type="file" id="file" name="inputFile" class="inputFile" onchange="">
-            <br>name: <input type="text" name="nameFile" class="nameFile">
-            <button>Upload</button>
-        </form>
-        {% for message in messagesUpload %}
-            <div class="messagesUpload">{{ message }}</div>
-        {% endfor %}
-    <div class="createDirectory"> Create a directory:  <img class="icon_dir" src="assets/img/icon_dir"></div>
-    <form class="formDir" method="POST">
-        <br>
-        name: <input name="nameDirectory" type="text"><br>
-        <button class="btnCreate">Create</button>
-    </form>
+    <h2 class="titleUploadCheck">Upload Files</h2>
+    <div class="blockUpload">
 
-    <div class="files">Files</div>
-    <div class="listFiles">
+        <div class="upload_createDir">
+            <form class="formUpload_dir" name="upload" method="POST" enctype="multipart/form-data">
+            <div class="messageUpload_dir">Upload a file: <img class="icon_file" src="assets/img/icon_file"></div>
+                <label for="file" class="labelFile_dir">
+                    <img class="icon_arrow" src="assets/img/icon_arrow.png" alt="icon arrow"><img class="icon_file_label" src="assets/img/icon_file.png" alt="icon file">
+                </label>
+                <input type="file" id="file" name="inputFile" class="inputFile">
+                <div id="showNameFile"></div>
+                <div class="messageName">Name:</div>
+                <div class="blockInputButtonName">
+                    <input type="text" name="nameFile" class="nameFile form-control">
+                    <button class="btn btn-primary btnUploadFile">Upload</button>
+                </div>
+            </form>
+            {% for message in messagesUpload %}
+                <div class="messagesUpload">{{ message }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="upload_createDir">
+            <form class="formUpload_dir" method="POST">
+                <div class="messageUpload_dir"> Create a directory:  <img class="icon_dir" src="assets/img/icon_dir"></div>
+                <label for="nameDirectory" class="labelFile_dir">
+                    <img class="icon_file_label" src="assets/img/icon_dir.png" alt="icon dir">
+                </label>
+                <div class="messageName">Name:</div>
+                <div class="blockInputButtonName">
+                    <input class="nameFile form-control" id="nameDirectory" name="nameDirectory" type="text">
+                    <button class="btn btn-primary btnUploadFile">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="titleUploadCheck">Files</h2>
+    <div id="listFiles">
     {% for directoryName in directory %}
         <img class="icon_dir" src="assets/img/icon_dir.png">
-        <a class="list" href="?action=files&path={{ path }}/{{ directoryName }}">{{directoryName}}</a>
+        <a class="list" href="?action=files&path={{ path }}/{{ directoryName }}#listFiles">{{directoryName}}</a>
         <a href="?action=files&path={{ path }}&name={{ directoryName }}#pop-up"><img class="icon_rename" src="assets/img/icon_rename.png" alt="icon rename"></a>
         <a href="?action=files&path={{ path }}&delete={{ directoryName }}"><img class="icon_delete" src="assets/img/icon_delete.png" alt="icon delete"></a>
         <a href="?action=files&path={{ path }}&move={{ directoryName }}#pop-upMove"><img class="icon_delete" src="assets/img/icon_move.png" alt="icon move"></a><br>
@@ -41,16 +60,16 @@
     {% endfor %}
         <br>
         <img class="icon_arrow_back" src="assets/img/icon_arrow_back">
-        <a class="list" href="?action=files&path={{ path }}&back=true">back</a>
+        <a class="list" href="?action=files&path={{ path }}&back=true#listFiles">back</a>
         <div id="pop-up">
             <div class="popUp">
                 <form class="formPopUp" method="POST">
-                    <ul>
-                        <li class="exitPopup"><a href="#">X</a></li>
-                        <li class="edit">Change the File name</li>
-                        <li><input type="text" name="newName" class="inputEdit" value=""></li>
-                        <li><button class="btnForm" id="btnEdit">Enter</button></li>
-                    </ul>
+                    <div class="message_crossPopUp">
+                        <div class="messagePopUp">Change the File name</div>
+                        <div class="exitPopup"><a href="#listFiles">X</a></div>
+                    </div>
+                        <input type="text" name="newName" class="form-control inputPopUp" value="">
+                        <button class="btn btn-primary btnPopUp">Enter</button>
                 </form>
             </div>
         </div>
@@ -58,15 +77,26 @@
         <div id="pop-upMove">
             <div class="popUp">
                 <form class="formPopUp" method="POST">
-                    <ul>
-                        <li class="exitPopup"><a href="#">X</a></li>
-                        <li class="edit">Write the new directory</li>
-                        <li><input type="text" name="moveFile" class="inputEdit" value=""></li>
-                        <li><button class="btnForm" id="btnEdit">Enter</button></li>
-                        <div class="example">Example: directory1/directory2</div>
-                    </ul>
+                        <div class="message_crossPopUp">
+                            <div class="messagePopUp">Write the new directory</div>
+                            <div class="exitPopup"><a href="#listFiles">X</a></div>
+                        </div>
+                        <input type="text" name="moveFile" class=" form-control inputPopUp" value="">
+                        <button class="btn btn-primary btnPopUp">Enter</button>
+                        <div class="example">Example: directory1 /directory2</div>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        window.onload = function () {
+            var input = document.querySelector('#file');
+            var nameFile = document.querySelector('#showNameFile');
+            input.addEventListener('change', function () {
+                if (input.value !== ''){
+                    nameFile.innerHTML = "file: " + input.value.replace("C:\\fakepath\\", "");
+                }
+            });
+        }
+    </script>
 {% endblock %}
