@@ -96,6 +96,8 @@ class MainController extends BaseController
 
     public function filesAction()
     {
+        $messageUploadSuccess = '';
+        $messageUploadError = '';
         $LogManager = new LogManager();
         if(!isset($_SESSION['pseudo'])){
             $LogManager -> securityLog("User no logged in try to go to files \n");
@@ -150,7 +152,7 @@ class MainController extends BaseController
             'file' => $file,
             'directory' => $directory,
             'path' => $path,
-         'messagesUploadSuccess' => $messageUploadSuccess,
+            'messagesUploadSuccess' => $messageUploadSuccess,
             'messagesUploadError' => $messageUploadError];
         return $this->render('files.html.twig',$data);
     }
